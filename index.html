@@ -8,9 +8,7 @@
   <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="main.css">
-  <!-- <script src="main.js"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.8/dist/vue.js"></script>
-  <!-- <script type="module" src="draggable.mjs"></script> -->
   <script src="https://unpkg.com/vue-draggable@1.0.9/lib/vue-draggable.js"></script>
   <link rel="stylesheet" href="train.css">
 </head>
@@ -25,14 +23,11 @@
       <form v-on:submit.prevent="onSubmit">
         <h4>Step 1 - Select a Type of Wagon:</h4>
         <select v-model="firstSelection">
-          <!-- <option disabled selected>Select</option> -->
           <option v-for="wagon in wagons">{{ wagon }}</option>
         </select>
         <h4>Step 2 - Select a Subtype (if applicable):</h4>
         <select v-model="secondSelection">
-          <!-- <option disabled selected>Select</option>  -->
           <option  v-if="firstSelection === 'Covered Wagon'" v-for="subtype in coveredWagons">{{ subtype }}</option>
-          <!-- <option  v-else-if="firstSelection === 'Tank Wagon'" v-for="subtype in tankWagons">{{ subtype }}</option> -->
           <option v-if="firstSelection === 'Tank Wagon'" v-for="subtype in tankWagons">{{ subtype }}</option>
           
         </select>
@@ -46,11 +41,7 @@
       
     <section>
       Current Train Setup (re-order train by drag and dropping a wagon to a different location):
-      <!-- <test v-for="train in trainSet" :vibe="train" v-bind:key="id"></test> -->
       <test v-if="trainSet.length" :vibe="trainSet"></test>
-        <!-- <span v-for="train in trainSet" v-if="trainSet.length !== 0"> 
-          {{ train.wagon }}{{ train.setup ? ',' : ''}} {{ train.setup ? train.setup : ''}}
-        </span> -->
     </section>
   </div>
 
@@ -75,45 +66,12 @@
       return {
         trainSet: this.vibe,
         options: {
-          // dropzoneSelector: 'ul',
-          // draggableSelector: 'li',
-          // showDropzoneAreas: true,
-          // multipleDropzonesItemsDraggingEnabled: true,
-          // onDrop(event) {
-          //   console.log(event);
-          // },
-          // onDragstart(event) {
-          //   event.stop();
-          // },
-          onDragend(event) {
-            // if you need to stop d&d
-            // event.stop();
-
-            // you can call component methods, just don't forget 
-            // that here `this` will not reference component scope,
-            // so out from this returned data object make reference
-            // to component instance
-            componentInstance.someDummyMethod();
-            // console.log(event.droptarget)
-            // to detect if draggable element is dropped out
-            console.log(event)
-            if (!event.droptarget) {
-              console.log('event is dropped out');
-              // document.getElementById(train.id)
-              // console.log(vibe);
-            }
-          }
         }
       }
     },
     methods: {
-      someDummyMethod() {
-        console.log('Hello from someDummyMethod');
-        console.log(this.trainSet)
-      }
     }
   })
-  // .$mount("#app");
   var app = new Vue({
       el: '#app',
       data: {
